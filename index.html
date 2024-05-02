@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script> -->
+
+    <link rel="stylesheet" href="slick.css">
+    <link rel="stylesheet" href="slick-theme.css">
+    <script src="script.js"></script>
+
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Harsh Prajapati</h1>
+        <ul>
+            <li>Home</li>
+            <li>Page</li>
+            <li>About</li>
+            <li>Review</li>
+            <li>Contact Us</li>
+        </ul>
+
+        <script>
+            window.onscroll = function () {
+                var header = document.querySelector("header");
+                if (window.pageYOffset > 0) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            };
+        </script>
+
+        <div class="go-top">
+            <p class="go-top-text">Back To Top</p>
+        </div>
+
+
+        <script>
+            $(function () {
+                $(window).scroll(function () {
+                    var scrolled = $(window).scrollTop();
+                    if (scrolled > 200) $('.go-top').fadeIn('slow');
+                    if (scrolled < 200) $('.go-top').fadeOut('slow');
+                });
+
+                $('.go-top').click(function () {
+                    $("html, body").animate({ scrollTop: "0" }, 500);
+                });
+
+            });
+
+        </script>
+    </div>
+
+
+
+
+    <div class="cursor-pointer">
+        <div class="cursor"></div>
+        <div class="cursor2"></div>
+    </div>
+    <script>
+        // UPDATE: I was able to get this working again... Enjoy!
+
+        var cursor = document.querySelector('.cursor');
+        var cursorinner = document.querySelector('.cursor2');
+        var a = document.querySelectorAll('a');
+
+        document.addEventListener('mousemove', function (e) {
+            var x = e.clientX;
+            var y = e.clientY;
+            cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            var x = e.clientX;
+            var y = e.clientY;
+            cursorinner.style.left = x + 'px';
+            cursorinner.style.top = y + 'px';
+        });
+
+        document.addEventListener('mousedown', function () {
+            cursor.classList.add('click');
+            cursorinner.classList.add('cursorinnerhover')
+        });
+
+        document.addEventListener('mouseup', function () {
+            cursor.classList.remove('click')
+            cursorinner.classList.remove('cursorinnerhover')
+        });
+
+        a.forEach(item => {
+            item.addEventListener('mouseover', () => {
+                cursor.classList.add('hover');
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        })
+    </script>
+
+    <div class="main">
+        <section class="cd-intro">
+            <h1 class="cd-headline rotate-1">
+                <span>I'm </span>
+                <span class="cd-words-wrapper">
+                    <b class="is-visible">Front-end Developer</b>
+                    <b>Back-end Developer</b>
+                    <b>Graphic Designer</b>
+                </span>
+            </h1>
+        </section>
+
+        <script>
+            var animationDelay = 3500;
+
+            animateHeadline($('.cd-headline'));
+
+            function animateHeadline($headlines) {
+                $headlines.each(function () {
+                    var headline = $(this);
+                    //trigger animation
+                    setTimeout(function () { hideWord(headline.find('.is-visible')) }, animationDelay);
+                    //other checks here ...
+                });
+            }
+
+            function hideWord($word) {
+                var nextWord = takeNext($word);
+                switchWord($word, nextWord);
+                setTimeout(function () { hideWord(nextWord) }, animationDelay);
+            }
+
+            function takeNext($word) {
+                return (!$word.is(':last-child')) ? $word.next() : $word.parent().children().eq(0);
+            }
+
+            function switchWord($oldWord, $newWord) {
+                $oldWord.removeClass('is-visible').addClass('is-hidden');
+                $newWord.removeClass('is-hidden').addClass('is-visible');
+            }
+
+            singleLetters($('.cd-headline.letters').find('b'));
+
+            function singleLetters($words) {
+                $words.each(function () {
+                    var word = $(this),
+                        letters = word.text().split(''),
+                        selected = word.hasClass('is-visible');
+                    for (i in letters) {
+                        letters[i] = (selected) ? '<i class="in">' + letters[i] + '</i>' : '<i>' + letters[i] + '</i>';
+                    }
+                    var newLetters = letters.join('');
+                    word.html(newLetters);
+                });
+            }
+        </script>
+
+        <h1>accordion</h1>
+        <div class="container">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-titel">
+                        <h2>Section-1 <span><i class="fa-solid fa-angle-down"></i></span></h2>
+                    </div>
+                    <div class="accordion-contant">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam neque quisquam cumque,
+                            distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
+                            neque quisquam cumque, distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur
+                            adipisicing elit. Veniam neque quisquam cumque, distinctio ducimus pariatur?</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-titel">
+                        <h2>Section-2 <span><i class="fa-solid fa-angle-down"></i></span></h2>
+                    </div>
+                    <div class="accordion-contant">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam neque quisquam cumque,
+                            distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
+                            neque quisquam cumque, distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur
+                            adipisicing elit. Veniam neque quisquam cumque, distinctio ducimus pariatur?</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-titel">
+                        <h2>Section-3 <span><i class="fa-solid fa-angle-down"></i></span></h2>
+                    </div>
+                    <div class="accordion-contant">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam neque quisquam cumque,
+                            distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
+                            neque quisquam cumque, distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur
+                            adipisicing elit. Veniam neque quisquam cumque, distinctio ducimus pariatur?</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-titel">
+                        <h2>Section-4 <span><i class="fa-solid fa-angle-down"></i></span></h2>
+                    </div>
+                    <div class="accordion-contant">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam neque quisquam cumque,
+                            distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
+                            neque quisquam cumque, distinctio ducimus pariatur?Lorem, ipsum dolor sit amet consectetur
+                            adipisicing elit. Veniam neque quisquam cumque, distinctio ducimus pariatur?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $(".accordion-titel").click(function () {
+                    $(this).parent(".accordion-item").find(".accordion-contant").slideToggle();
+                    $(this).parent(".accordion-item").prevAll(".accordion-item").find(".accordion-contant").slideUp();
+                    $(this).parent(".accordion-item").nextAll(".accordion-item").find(".accordion-contant").slideUp();
+                });
+            });
+        </script>
+    </div>
+
+    <div class="counter">
+        <h1>Counter </h1>
+        <div class="count">45</div>
+        <div class="count">100</div>
+        <div class="count">115</div>
+        <div class="count">50</div>
+        <div class="count">125</div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var counters = $(".count");
+            var countersQuantity = counters.length;
+            var counter = [];
+
+            for (i = 0; i < countersQuantity; i++) {
+                counter[i] = parseInt(counters[i].innerHTML);
+            }
+
+            var count = function (start, value, id) {
+                var localStart = start;
+                setInterval(function () {
+                    if (localStart < value) {
+                        localStart++;
+                        counters[id].innerHTML = localStart;
+                    }
+                }, 40);
+            }
+
+            for (j = 0; j < countersQuantity; j++) {
+                count(0, counter[j], j);
+            }
+        });
+    </script>
+
+    <div class="wrapper">
+        <h2>Slick Slider<h2>
+                <div class="carousel">
+                    <div><img src="https://buffer.com/library/content/images/2023/10/free-images.jpg"></div>
+                    <div><img src="https://images.unsplash.com/photo-1557689482-e19d04f1b197?w=420&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXRodW1ibmFpbHx8d08xb0pnRkhtWW98fGVufDB8fHx8fA%3D%3D"></div>
+                    <div><img src="https://static.vecteezy.com/system/resources/thumbnails/021/746/785/small/holding-a-tree-in-a-ball-ecology-and-environment-concept-with-generative-ai-photo.jpg"></div>
+                    <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYmhBj9Wialrm75dISEoptF-BJZI0M7FUq28_O9Y0RRmeLeND84LRSOvzFN7D3V8UYLuY&usqp=CAU"></div>
+                    <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmA6OphbQ8UEDRHmPSjgveWosLoDfxzss7W-LrQQ4nSA&s"></div>
+                    <div><img src="https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg"></div>
+                </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.carousel').slick({
+                infinite: true,
+                slidesToShow: 3,
+                dots: true,
+                centerMode: true,
+            });
+        });
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.js"></script>
+
+
+
+</body>
+
+</html>
